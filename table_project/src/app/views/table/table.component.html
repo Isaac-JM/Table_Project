@@ -12,12 +12,40 @@
     <tbody>
         <tr *ngFor="let job of jobs | paginate: { itemsPerPage: 15, currentPage: pages }">
             <td><img src={{job.logo}} style="width: 70px; height: 20px;">{{job.referencia}}</td>
-            <td class="d-flex justify-content-between"><i
-                    class="bi bi-exclamation-circle text-warning"></i>x{{job.cantidad}}</td>
-            <td>{{job.estado}}</td>
-            <td>{{job.tipo}}</td>
-            <td>{{job.fecha}}</td>
-            <td>{{job.codigo_cliente}} {{job.alias_cliente}}</td>
+            
+            <td class="d-flex justify-content-between"><i *ngIf="job.observacion!=''"
+                    class="bi bi-exclamation-circle text-warning" data-toggle="tooltip" data-placement="bottom"
+                    title="Obs.linea: {{job.observacion}} , Obs.pedido:  , Pedido por: {{job.usuario}}"></i>
+                <i *ngIf="job.observacion==''" class="bi bi-info-circle text-primary" data-toggle="tooltip"
+                    data-placement="bottom"
+                    title="Obs.linea: {{job.observacion}} , Obs.pedido:  ,  Pedido por: {{job.usuario}}"></i>x{{job.cantidad}}
+            </td>
+
+            <td *ngIf="job.estado=='Pendiente'"><span class="bg-secondary p-1 rounded text-white">{{job.estado}}</span>
+            </td>
+            <td *ngIf="job.estado=='Recogiendo'"><span class="bg-primary p-1 rounded text-white">{{job.estado}}</span>
+            </td>
+            <td *ngIf="job.estado=='Recogida'"><span class="bg-warning p-1 rounded text-white">{{job.estado}}</span>
+            </td>
+            <td *ngIf="job.estado=='Desconsolidando'"><span
+                    class="bg-black p-1 rounded text-white">{{job.estado}}</span></td>
+            <td *ngIf="job.estado=='Desconsolidada'"><span
+                    class="bg-danger p-1 rounded text-white">{{job.estado}}</span></td>
+            <td *ngIf="job.estado=='Incidencia'"><span class="bg-muted p-1 rounded text-white">{{job.estado}}</span>
+            </td>
+            <td *ngIf="job.estado=='Entregada'"><span class="bg-success p-1 rounded text-white">{{job.estado}}</span>
+            </td>
+
+
+
+            <td *ngIf="job.tipo=='Mesa'"><span class="bg-primary p-1 rounded text-white">{{job.tipo}}</span></td>
+            <td *ngIf="job.tipo=='Ruta'"><span class="bg-black p-1 rounded text-white">{{job.tipo}}</span></td>
+            <td *ngIf="job.tipo=='Urgente'"><span class="bg-secondary p-1 rounded text-white">{{job.tipo}}</span></td>
+
+
+            <td>{{job.fecha | date:'HH:mm'}} <span style="font-size: 10px; color:gray">{{job.fecha |
+                    date:'yyyy-MM-dd'}}</span></td>
+            <td><span style="font-size: 10px; color:gray">{{job.codigo_cliente}}</span> {{job.alias_cliente}}</td>
 
         </tr>
 
@@ -25,7 +53,7 @@
 </table>
 <div class="container-fluid d-flex justify-content-between">
     <div class="w-50">
-        <span style="font-size:25px">LÍNEAS: <strong>{{lines}}</strong></span> 
+        <span style="font-size:25px">LÍNEAS: <strong>{{lines}}</strong></span>
     </div>
     <div class="w-50">
         <pagination-controls (pageChange)="pages = $event"></pagination-controls>
