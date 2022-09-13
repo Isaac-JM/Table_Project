@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { DbService } from 'src/app/services/db-service/db-service.service';
 
 @Component({
   selector: 'app-form',
@@ -8,10 +7,8 @@ import { DbService } from 'src/app/services/db-service/db-service.service';
 })
 export class FormComponent implements OnInit {
 
-  constructor(private service: DbService) { }
+  constructor() { }
 
-  ngOnInit(): void {
-    this.service.getDatas("getTareas").subscribe(res=>console.log(res))
-  }
+  ngOnInit(): void {}
 
 }
