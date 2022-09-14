@@ -13,12 +13,14 @@
         <tr *ngFor="let job of jobs | paginate: { itemsPerPage: 15, currentPage: pages }">
             <td><img src={{job.logo}} style="width: 70px; height: 20px;">{{job.referencia}}</td>
 
-            <td class="d-flex justify-content-between"><i *ngIf="job.observacion!=''"
-                    class="bi bi-exclamation-circle text-warning" data-toggle="tooltip" data-placement="bottom"
-                    title="Obs.linea: {{job.observacion}} , Obs.pedido:  , Pedido por: {{job.usuario}}"></i>
-                <i *ngIf="job.observacion==''" class="bi bi-info-circle text-primary" data-toggle="tooltip"
-                    data-placement="bottom"
-                    title="Obs.linea: {{job.observacion}} , Obs.pedido:  ,  Pedido por: {{job.usuario}}"></i>x{{job.cantidad}}
+            <td class="d-flex justify-content-between">
+                <i *ngIf="job.observacion!=''"
+                    class="bi bi-exclamation-circle text-warning"   placement="bottom" 
+                [ngbTooltip]="tipContent"></i>
+                    
+                <i *ngIf="job.observacion==''" class="bi bi-info-circle text-primary" placement="bottom"
+                [ngbTooltip]="tipContent"></i>x{{job.cantidad}}
+                    <ng-template #tipContent><strong>Obs.linea:</strong> {{job.observacion}}<br/><strong>Pedido por:</strong> {{job.usuario}}</ng-template>
             </td>
 
             <td *ngIf="job.estado=='Pendiente'"><span class="bg-secondary p-1 rounded text-white">{{job.estado}}</span>

@@ -23,4 +23,5 @@ export class TableComponent implements OnInit {
     this.jobs$.subscribe((res) => { this.jobs = res; this.lines = res.length })
   }
 
+  
 }
