@@ -51,9 +51,7 @@
 
                 <select class="form-select" formControlName="type">
                     <option selected value="">TODOS</option>
-                    <option value="Mesa">Mesa</option>
-                    <option value="Ruta">Ruta</option>
-                    <option value="Urgente">Urgente</option>
+                    <option *ngFor="let type of types" value="{{type}}">{{type}}</option>
                 </select>
                 <div class="input-group-append">
                     <button class="btn btn-outline-danger" type="button" (click)="resetType()">X</button>
@@ -64,57 +62,17 @@
         <label for="type">Estado:</label>
         <div class="form-group border border-gray">
 
-            <div class="form-check m-1">
-                <input class="form-check-input" type="checkbox" value="" id="pendient" formControlName="state">
+            <div class="form-check m-1" *ngFor="let state of states">
+                <input class="form-check-input" type="checkbox" value="" id="pendient" formControlName={{state}}>
                 <label class="form-check-label" for="pendient">
-                    Pendiente
+                    {{state}}
                 </label>
             </div>
 
-            <div class="form-check m-1">
-                <input class="form-check-input" type="checkbox" value="" id="pick-up" formControlName="state1">
-                <label class="form-check-label" for="pick-up">
-                    Recogiendo
-                </label>
-            </div>
-
-            <div class="form-check m-1">
-                <input class="form-check-input" type="checkbox" value="" id="pick" formControlName="state2">
-                <label class="form-check-label" for="pick">
-                    Recogida
-                </label>
-            </div>
-
-            <div class="form-check m-1">
-                <input class="form-check-input" type="checkbox" value="" id=" Deconsolidating" formControlName="state3">
-                <label class="form-check-label" for="Deconsolidating">
-                    Desconsolidando
-                </label>
-            </div>
-
-            <div class="form-check m-1">
-                <input class="form-check-input" type="checkbox" value="" id="Deconsolidated" formControlName="state4">
-                <label class="form-check-label" for="Deconsolidated">
-                    Desconsolidada
-                </label>
-            </div>
-
-            <div class="form-check m-1">
-                <input class="form-check-input" type="checkbox" value="" id="delivered" formControlName="state5">
-                <label class="form-check-label" for="delivered">
-                    Entregada
-                </label>
-            </div>
-
-            <div class="form-check m-1">
-                <input class="form-check-input" type="checkbox" value="" id="incidence" formControlName="state6">
-                <label class="form-check-label" for="incidence">
-                    Incidencia
-                </label>
-            </div>
+           
         </div>
 
-        <button type="button" class="btn btn-outline-primary mt-3 w-100"><i class="bi bi-search"></i> Buscar</button>
+        <button type="button" class="btn btn-outline-primary mt-3 w-100" (click)="search()"><i class="bi bi-search"></i> Buscar</button>
     </form>
 
 </div>

@@ -12,7 +12,7 @@
     <tbody>
         <tr *ngFor="let job of jobs | paginate: { itemsPerPage: 15, currentPage: pages }">
             <td><img src={{job.logo}} style="width: 70px; height: 20px;">{{job.referencia}}</td>
-            
+
             <td class="d-flex justify-content-between"><i *ngIf="job.observacion!=''"
                     class="bi bi-exclamation-circle text-warning" data-toggle="tooltip" data-placement="bottom"
                     title="Obs.linea: {{job.observacion}} , Obs.pedido:  , Pedido por: {{job.usuario}}"></i>

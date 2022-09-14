@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { DbService } from 'src/app/services/db-service/db-service.service';
+import { FilterService } from 'src/app/services/filter-service/filter.service';
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
@@ -7,23 +9,27 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class FormComponent implements OnInit {
 
-  constructor(private form: FormBuilder) { }
+  constructor(private form: FormBuilder,private filter:FilterService,private service:DbService) { }
+  states!:any[];
+  types!:any[];
   filterForm: FormGroup = this.form.group({
     client: [''],
     ref: [''],
     user: [''],
     date: [''],
     type: [''],
-    state: [false],
-    state1: [false],
-    state2: [false],
-    state3: [false],
-    state4: [false],
-    state5: [false],
-    state6: [false],
+    Pendiente: [''],
+    Recogiendo: [''],
+    Recogida: [''],
+    Desconsolidando: [''],
+    Desconsolidada: [''],
+    Entregada: [''],
+    Incidencia: [''],
   })
   ngOnInit(): void {
-
+    this.service.getDatas("getEstados").subscribe(res=>this.states=res.data)
+    this.service.getDatas("getTipos").subscribe(res=>this.types=res.data)
+    
   }
 
   resetClient() {
@@ -46,6 +52,8 @@ export class FormComponent implements OnInit {
     this.filterForm.controls['type'].setValue("");
   }
 
-
+search(){
+  this.filter.search(this.filterForm);
+}
 
 }
