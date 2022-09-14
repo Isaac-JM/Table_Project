@@ -15,6 +15,44 @@ export class FilterService {
   search(form: FormGroup) {
     console.log(form.controls)
     this.service.getDatas('getTareas').subscribe((res => {
+
+     
+      
+      if (form.controls['client'].value !== "") {
+        this.array = res.data.filter((re: string | any) => re.alias_cliente.includes(form.controls['client'].value));
+
+        this.array3 = this.array3.concat(this.array)
+      }
+
+      if (form.controls['ref'].value !== "") {
+        this.array = res.data.filter((re: string | any) => re.referencia.includes(form.controls['ref'].value));
+
+        this.array3 = this.array3.concat(this.array)
+      }
+
+      if (form.controls['user'].value !== "") {
+        this.array = res.data.filter((re: string | any) => re.usuario.includes(form.controls['user'].value));
+
+        this.array3 = this.array3.concat(this.array)
+      }
+
+      if (form.controls['date'].value !== "" && form.controls['date1'].value !== "") {
+        console.log(form.controls['date'].value)
+        this.array = res.data.filter((re: string | any) => re.fecha>=form.controls['date'].value && re.fecha<=form.controls['date1'].value);
+
+        this.array3 = this.array3.concat(this.array)
+      }
+
+      if (form.controls['type'].value !== "") {
+        this.array = res.data.filter((re: string | any) => re.tipo===form.controls['type'].value);
+
+        this.array3 = this.array3.concat(this.array)
+
+        if (form.controls['type'].value === "TODOS") {
+          this.array3=res.data
+        }
+      }
+
       if (form.controls['Pendiente'].value == true) {
         this.array = res.data.filter((re: string | any) => re.estado === "Pendiente");
 
@@ -41,7 +79,6 @@ export class FilterService {
         this.array = res.data.filter((re: string | any) => re.estado === "Desconsolidando")
         this.array3 = this.array3.concat(this.array)
       }
-
 
 
       if (form.controls['Entregada'].value == true) {

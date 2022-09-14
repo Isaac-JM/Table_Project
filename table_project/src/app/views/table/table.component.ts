@@ -18,6 +18,7 @@ export class TableComponent implements OnInit {
   ngOnInit(): void {
     this.service.getDatas("getTareas").subscribe((res) => {
       this.filter.jobs.next(res.data)
+      console.log(res.data)
     })
     this.jobs$.subscribe((res) => { this.jobs = res; this.lines = res.length })
   }

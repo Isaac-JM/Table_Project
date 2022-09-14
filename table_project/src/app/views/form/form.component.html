@@ -37,8 +37,8 @@
         <div class="form-group">
             <label for="date">Fecha:</label>
             <div class="input-group mb-3">
-
                 <input type="date" class="form-control" id="date" formControlName="date">
+                <input type="date" class="form-control" id="date1" formControlName="date1" min={{filterForm.value.date}} *ngIf="filterForm.value.date!==''">
                 <div class="input-group-append">
                     <button class="btn btn-outline-danger" type="button" (click)="resetDate()">X</button>
                 </div>
@@ -50,7 +50,7 @@
             <div class="input-group mb-3">
 
                 <select class="form-select" formControlName="type">
-                    <option selected value="">TODOS</option>
+                    <option value="TODOS" selected>TODOS</option>
                     <option *ngFor="let type of types" value="{{type}}">{{type}}</option>
                 </select>
                 <div class="input-group-append">

@@ -17,6 +17,7 @@ export class FormComponent implements OnInit {
     ref: [''],
     user: [''],
     date: [''],
+    date1: [''],
     type: [''],
     Pendiente: [''],
     Recogiendo: [''],
