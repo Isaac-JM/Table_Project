@@ -11,17 +11,17 @@ import { FilterService } from 'src/app/services/filter-service/filter.service';
 export class TableComponent implements OnInit {
 
   constructor(private service: DbService, private filter: FilterService) { }
-  jobs$: Observable<any[]> = this.filter.jobs;
-  jobs!: any[];
+  jobs$: Observable<any> = this.filter.jobs;
   lines: number = 0;
   pages: number = 1;
   ngOnInit(): void {
     this.service.getDatas("getTareas").subscribe((res) => {
       this.filter.jobs.next(res.data)
-      console.log(res.data)
+      this.lines = res.data.length
     })
-    this.jobs$.subscribe((res) => { this.jobs = res; this.lines = res.length })
+
+    this.jobs$.subscribe(res => this.lines = res.length)
   }
 
-  
+
 }
