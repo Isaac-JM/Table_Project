@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DbService } from 'src/app/services/db-service/db-service.service';
-import { FilterService } from 'src/app/services/filter-service/filter.service';
+import { DataService } from 'src/app/services/data-service/data-service.service';
+
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
@@ -9,7 +10,7 @@ import { FilterService } from 'src/app/services/filter-service/filter.service';
 })
 export class FormComponent implements OnInit {
 
-  constructor(private form: FormBuilder,private filter:FilterService,private service:DbService) { }
+  constructor(private form: FormBuilder,private data:DataService,private service:DbService) { }
   states!:any[];
   types!:any[];
   filterForm: FormGroup = this.form.group({
@@ -18,7 +19,7 @@ export class FormComponent implements OnInit {
     user: [''],
     date: [''],
     date1: [''],
-    type: [''],
+    type: ['TODOS'],
     Pendiente: [''],
     Recogiendo: [''],
     Recogida: [''],
@@ -54,7 +55,9 @@ export class FormComponent implements OnInit {
   }
 
 search(){
-  this.filter.search(this.filterForm);
+this.data.form.next(this.filterForm);
 }
+
+
 
 }

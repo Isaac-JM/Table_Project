@@ -10,17 +10,18 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let job of jobs$ | async | paginate: { itemsPerPage: 15, currentPage: pages }; ">
+        <tr
+            *ngFor="let job of jobs$ | async |filterClient:formInputs.client |filterType:formInputs.type | filterRef:formInputs.ref | filterUser:formInputs.user  | filter:formInputs.state | filter:formInputs.state1 | filter:formInputs.state2 | filter:formInputs.state3 | filter:formInputs.state4 | filter:formInputs.state5 | filter:formInputs.state6   |filterDate:date  | filterDate1:date1 | paginate: { itemsPerPage: 15, currentPage: pages }">
             <td><img src={{job.logo}} style="width: 70px; height: 20px;">{{job.referencia}}</td>
 
             <td class="d-flex justify-content-between">
-                <i *ngIf="job.observacion!=''"
-                    class="bi bi-exclamation-circle text-warning"   placement="bottom" 
-                [ngbTooltip]="tipContent"></i>
-                    
+                <i *ngIf="job.observacion!=''" class="bi bi-exclamation-circle text-warning" placement="bottom"
+                    [ngbTooltip]="tipContent"></i>
+
                 <i *ngIf="job.observacion==''" class="bi bi-info-circle text-primary" placement="bottom"
-                [ngbTooltip]="tipContent"></i>x{{job.cantidad}}
-                    <ng-template #tipContent><strong>Obs.linea:</strong> {{job.observacion}}<br/><strong>Pedido por:</strong> {{job.usuario}}</ng-template>
+                    [ngbTooltip]="tipContent"></i>x{{job.cantidad}}
+                <ng-template #tipContent><strong>Obs.linea:</strong> {{job.observacion}}<br /><strong>Pedido
+                        por:</strong> {{job.usuario}}</ng-template>
             </td>
 
             <td *ngIf="job.estado=='Pendiente'"><span class="bg-secondary p-1 rounded text-white">{{job.estado}}</span>
@@ -52,12 +53,9 @@
         </tr>
 
     </tbody>
+    <tfoot>
+        <span style="font-size:25px">LÍNEAS: <strong> {{(jobs$ | async|filterClient:formInputs.client |filterType:formInputs.type | filterRef:formInputs.ref | filterUser:formInputs.user  | filter:formInputs.state | filter:formInputs.state1 | filter:formInputs.state2 | filter:formInputs.state3 | filter:formInputs.state4 | filter:formInputs.state5 | filter:formInputs.state6   |filterDate:date  | filterDate1:date1).length}}</strong></span>
+    </tfoot>
 </table>
-<div class="container-fluid d-flex justify-content-between">
-    <div class="w-50">
-        <span style="font-size:25px">LÍNEAS: <strong>{{lines}}</strong></span>
-    </div>
-    <div class="w-50">
-        <pagination-controls (pageChange)="pages = $event"></pagination-controls>
-    </div>
-</div>
+
+<pagination-controls (pageChange)="pages = $event" style="position:relative; float:right; bottom:5%; height:5px;"></pagination-controls>
