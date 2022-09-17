@@ -51,7 +51,7 @@ export class FormComponent implements OnInit {
   }
 
   resetType() {
-    this.filterForm.controls['type'].setValue("");
+    this.filterForm.controls['type'].setValue("TODOS");
   }
 
 search(){

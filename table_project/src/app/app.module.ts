@@ -15,6 +15,8 @@ import { FilterPipeText } from './services/pipes/filter-text.pipe';
 import { FilterPipeText1 } from './services/pipes/filter-text.pipe';
 import { FilterPipeText2 } from './services/pipes/filter-text.pipe';
 import { FilterPipeText3 } from './services/pipes/filter-text.pipe';
+import { FilterPipeCheck1 } from './services/pipes/filter-checkbox.pipe';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +27,9 @@ import { FilterPipeText3 } from './services/pipes/filter-text.pipe';
     FilterPipeText,
     FilterPipeText1,
     FilterPipeText2,
-    FilterPipeText3
+    FilterPipeText3,
+    FilterPipeCheck1,
+
 
   ],
   imports: [

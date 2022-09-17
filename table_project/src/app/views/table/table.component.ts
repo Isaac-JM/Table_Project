@@ -47,5 +47,6 @@ export class TableComponent implements OnInit {
       this.date = res.controls['date'].value
       this.date1 = res.controls['date1'].value
     })
+    
   }
 }
