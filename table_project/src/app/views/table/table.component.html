@@ -11,7 +11,7 @@
     </thead>
     <tbody>
         <tr
-            *ngFor="let job of jobs$ | async |filterClient:formInputs.client |filterType:formInputs.type | filterRef:formInputs.ref | filterUser:formInputs.user  | filterCheck:[formInputs.state,formInputs.state1,formInputs.state2,formInputs.state3,formInputs.state4,formInputs.state5,formInputs.state6] |filterDate:date  | filterDate1:date1 | paginate: { itemsPerPage: 15, currentPage: pages }">
+            *ngFor="let job of jobs$ | async |paginate: { itemsPerPage: 15, currentPage: pages }">
             <td><img src={{job.logo}} style="width: 70px; height: 20px;">{{job.referencia}}</td>
 
             <td class="d-flex justify-content-between">
@@ -54,7 +54,7 @@
 
     </tbody>
     <tfoot>
-        <span style="font-size:25px">LÍNEAS: <strong> {{(jobs$ | async|filterClient:formInputs.client |filterType:formInputs.type | filterRef:formInputs.ref | filterUser:formInputs.user  | filterCheck:[formInputs.state,formInputs.state1,formInputs.state2,formInputs.state3,formInputs.state4,formInputs.state5,formInputs.state6]  |filterDate:date  | filterDate1:date1).length}}</strong></span>
+        <span style="font-size:25px">LÍNEAS: {{lines}}<strong></strong></span>
     </tfoot>
 </table>
 

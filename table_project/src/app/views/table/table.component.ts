@@ -46,6 +46,11 @@ export class TableComponent implements OnInit {
       this.formInputs.state6 = res.controls['Incidencia'].value == true ? "Incidencia" : '';
       this.date = res.controls['date'].value
       this.date1 = res.controls['date1'].value
+
+      this.service.getDatasFilter("getTareas",this.formInputs,this.date,this.date1).subscribe((res) => {
+        this.data.jobs.next(res.data)
+        this.lines = res.data.length
+      })
     })
     
   }
