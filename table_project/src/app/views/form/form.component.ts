@@ -15,8 +15,8 @@ export class FormComponent implements OnInit {
   types!:any[];
   filterForm: FormGroup = this.form.group({
     client: [''],
-    ref: [''],
     user: [''],
+    ref: [''],
     date: [''],
     date1: [''],
     type: ['TODOS'],

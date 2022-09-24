@@ -21,6 +21,7 @@ export class TableComponent implements OnInit {
   date1: any;
   lines: number = 0;
   pages: number = 1;
+
   ngOnInit(): void {
     this.service.getDatas("getTareas").subscribe((res) => {
       this.data.jobs.next(res.data)

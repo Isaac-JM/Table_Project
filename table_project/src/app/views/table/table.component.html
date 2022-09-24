@@ -1,61 +1,62 @@
 <table class="table">
-    <thead>
-        <tr>
-            <th scope="col">Producto</th>
-            <th scope="col">Q</th>
-            <th scope="col">Estado</th>
-            <th scope="col">Tipo</th>
-            <th scope="col">Fecha</th>
-            <th scope="col">Cliente</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr
-            *ngFor="let job of jobs$ | async |paginate: { itemsPerPage: 15, currentPage: pages }">
-            <td><img src={{job.logo}} style="width: 70px; height: 20px;">{{job.referencia}}</td>
+        <thead>
+            <tr>
+                <th scope="col">Producto</th>
+                <th scope="col">Q</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Cliente</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr
+                *ngFor="let job of jobs$ | async |paginate: { itemsPerPage: 10, currentPage: pages }">
+                <td><img src={{job.logo}} style="width: 70px; height: 20px;">{{job.referencia}}</td>
+    
+                <td class="d-flex justify-content-between">
+                    <i *ngIf="job.observacion!=''" class="bi bi-exclamation-circle text-warning" placement="bottom"
+                        [ngbTooltip]="tipContent"></i>
+    
+                    <i *ngIf="job.observacion==''" class="bi bi-info-circle text-primary" placement="bottom"
+                        [ngbTooltip]="tipContent"></i>x{{job.cantidad}}
+                    <ng-template #tipContent><strong>Obs.linea:</strong> {{job.observacion}}<br /><strong>Pedido
+                            por:</strong> {{job.usuario}}</ng-template>
+                </td>
+    
+                <td *ngIf="job.estado=='Pendiente'"><span class="bg-secondary p-1 rounded text-white">{{job.estado}}</span>
+                </td>
+                <td *ngIf="job.estado=='Recogiendo'"><span class="bg-primary p-1 rounded text-white">{{job.estado}}</span>
+                </td>
+                <td *ngIf="job.estado=='Recogida'"><span class="bg-warning p-1 rounded text-white">{{job.estado}}</span>
+                </td>
+                <td *ngIf="job.estado=='Desconsolidando'"><span
+                        class="bg-black p-1 rounded text-white">{{job.estado}}</span></td>
+                <td *ngIf="job.estado=='Desconsolidada'"><span
+                        class="bg-danger p-1 rounded text-white">{{job.estado}}</span></td>
+                <td *ngIf="job.estado=='Incidencia'"><span class="bg-muted p-1 rounded text-white">{{job.estado}}</span>
+                </td>
+                <td *ngIf="job.estado=='Entregada'"><span class="bg-success p-1 rounded text-white">{{job.estado}}</span>
+                </td>
+    
+    
+    
+                <td *ngIf="job.tipo=='Mesa'"><span class="bg-primary p-1 rounded text-white">{{job.tipo}}</span></td>
+                <td *ngIf="job.tipo=='Ruta'"><span class="bg-black p-1 rounded text-white">{{job.tipo}}</span></td>
+                <td *ngIf="job.tipo=='Urgente'"><span class="bg-secondary p-1 rounded text-white">{{job.tipo}}</span></td>
+    
+    
+                <td>{{job.fecha | date:'HH:mm'}} <span style="font-size: 10px; color:gray">{{job.fecha |
+                        date:'yyyy-MM-dd'}}</span></td>
+                <td><span style="font-size: 10px; color:gray">{{job.codigo_cliente}}</span> {{job.alias_cliente}}</td>
+    
+            </tr>
+    
+        </tbody>
+        <tfoot>
+            <span style="font-size:25px">LÍNEAS: {{lines}}<strong></strong></span>
+        </tfoot>
+    </table>
+    
+    <pagination-controls (pageChange)="pages = $event" style="position:relative; float:right; bottom:5%; height:5px;"></pagination-controls>
 
-            <td class="d-flex justify-content-between">
-                <i *ngIf="job.observacion!=''" class="bi bi-exclamation-circle text-warning" placement="bottom"
-                    [ngbTooltip]="tipContent"></i>
-
-                <i *ngIf="job.observacion==''" class="bi bi-info-circle text-primary" placement="bottom"
-                    [ngbTooltip]="tipContent"></i>x{{job.cantidad}}
-                <ng-template #tipContent><strong>Obs.linea:</strong> {{job.observacion}}<br /><strong>Pedido
-                        por:</strong> {{job.usuario}}</ng-template>
-            </td>
-
-            <td *ngIf="job.estado=='Pendiente'"><span class="bg-secondary p-1 rounded text-white">{{job.estado}}</span>
-            </td>
-            <td *ngIf="job.estado=='Recogiendo'"><span class="bg-primary p-1 rounded text-white">{{job.estado}}</span>
-            </td>
-            <td *ngIf="job.estado=='Recogida'"><span class="bg-warning p-1 rounded text-white">{{job.estado}}</span>
-            </td>
-            <td *ngIf="job.estado=='Desconsolidando'"><span
-                    class="bg-black p-1 rounded text-white">{{job.estado}}</span></td>
-            <td *ngIf="job.estado=='Desconsolidada'"><span
-                    class="bg-danger p-1 rounded text-white">{{job.estado}}</span></td>
-            <td *ngIf="job.estado=='Incidencia'"><span class="bg-muted p-1 rounded text-white">{{job.estado}}</span>
-            </td>
-            <td *ngIf="job.estado=='Entregada'"><span class="bg-success p-1 rounded text-white">{{job.estado}}</span>
-            </td>
-
-
-
-            <td *ngIf="job.tipo=='Mesa'"><span class="bg-primary p-1 rounded text-white">{{job.tipo}}</span></td>
-            <td *ngIf="job.tipo=='Ruta'"><span class="bg-black p-1 rounded text-white">{{job.tipo}}</span></td>
-            <td *ngIf="job.tipo=='Urgente'"><span class="bg-secondary p-1 rounded text-white">{{job.tipo}}</span></td>
-
-
-            <td>{{job.fecha | date:'HH:mm'}} <span style="font-size: 10px; color:gray">{{job.fecha |
-                    date:'yyyy-MM-dd'}}</span></td>
-            <td><span style="font-size: 10px; color:gray">{{job.codigo_cliente}}</span> {{job.alias_cliente}}</td>
-
-        </tr>
-
-    </tbody>
-    <tfoot>
-        <span style="font-size:25px">LÍNEAS: {{lines}}<strong></strong></span>
-    </tfoot>
-</table>
-
-<pagination-controls (pageChange)="pages = $event" style="position:relative; float:right; bottom:5%; height:5px;"></pagination-controls>
